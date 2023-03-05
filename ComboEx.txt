@@ -1,0 +1,148 @@
+' Type of Field
+Enum ControlVType
+   [Ascii String]
+   [Date Or Time]
+   [DecimalValue]
+   [IntegerValue]
+End Enum
+'
+' Text Alignment
+Enum ControlTextAlign
+   [Left  Justify] = 0
+   [Centered Text] = 1
+   [Right Justify] = 2
+End Enum
+'
+Enum ControlBordStyle
+   [Hidden] = 0
+   [Single] = 1
+End Enum
+'
+Enum ControlBackStyle
+   [Glass] = 0
+   [Solid] = 1
+End Enum
+'
+Enum ControlLabelPosition
+   [Left Side] = 0
+   [RightSide] = 1
+End Enum
+'
+Enum ControlStatus
+   [UserData] = 0
+   [Optional] = 1
+   [ReadOnly] = 2
+   [Disabled] = 3
+   [Validate] = 4
+End Enum
+'
+Enum ControlBords
+   [LF] = 0
+   [DN] = 1
+   [RG] = 2
+   [UP] = 3
+End Enum
+'
+' ListBox Header
+Enum ControlLBheader
+   [None]
+   [Cols]
+   [Rows]
+   [Both]
+End Enum
+'
+' ListBox Scroll
+Enum ControlLBscroll
+   [ScrollNone]
+   [ScrollHorz]
+   [ScrollVert]
+   [ScrollBoth]
+End Enum
+'
+'
+' Scrollbar Style
+Enum ControlSBstyle
+   [Regular] = 0
+   [Encarta] = 1
+   [FlatBar] = 2
+End Enum
+
+      Height                =   285
+      Left                  =   225
+      TabIndex              =   5
+      Top                   =   2040
+      Width                 =   4500
+      ColumnField           =   "0,1,2,3,4,0,0,0,0,0"
+      ColumnVType           =   "0,0,0,0,3,0,0,0,0,0"
+      ColumnCSize           =   "10,10,10,50,8,0,0,0,0,0"
+      ColumnWidth           =   "60,60,60,240,60,0,0,0,0,0"
+      ColumnSetup           =   ",,,,0,,,,,"
+      ColumnAlign           =   "0,0,0,0,2,0,0,0,0,0"
+      ColumnTitle           =   "Col.0,Col.1,Col.2,Col.3,Col.4,Col.5,Col.6,Col.7,Col.8,Col.9"
+      ListColumns           =   5   ' Total Number of Columns
+      ListBoundTo           =   2   ' Column Data to report  as Combo Value
+      ListCaption           =   2   ' Column Data to display as Combo Caption
+      ListWidth             =   500 ' Width of the DropDown
+      ListItems             =   15  ' Number of Rows to Display in the DropDown List
+      ListCellMargin        =   2   ' List Cell Text Margin Left and Right
+      ListHeight            =   12  ' List Row Height if not Integral
+      ListScroll            =   3   ' ControlLBscroll
+      ListScrollStyle       =   2   ' ControlSBstyle
+      ListHeader            =   3   ' ControlLBheader
+      ListIntegral          =   0   'False
+      ListForeColor         =   8388608
+      ListGridColor         =   15124413
+      ListHeaderColor       =   16761024
+      ListTitlesColor       =   255
+      ListBackColorOver     =   192
+      ComboMargin           =   "5,0,0,3"      ' Control Bord - Margins to display ComboCaption
+      LabelBackStyle        =   0              ' Control Back Style ( applied only to Label section )
+      LabelMargin           =   "0,0,5,2"      ' Control Bord - Margins to display LabelCaption
+      LabelFlashing         =   0              ' False
+      LabelFlashingInterval =   500
+      Status                =   2
+      StatusOver            =   2
+      StatusAuto            =   -1             ' True
+      LabelCaption          =   "COMBO LABEL:"
+      ComboCaption          =   "COMBOEX"
+      FontCombo             =   {0BE35203-8F91-11CE-9DE3-00AA004BB851}
+      FontLabel             =   {0BE35203-8F91-11CE-9DE3-00AA004BB851}
+      FontTitle             =   {0BE35203-8F91-11CE-9DE3-00AA004BB851}
+      ODBCoption            =   -1  'True
+      ODBCsource            =   "Data Provider=Microsoft.Jet.OLEDB.4.0;Data Source=sample.mdb;User Id=;Password=;"
+      ODBCselect            =   "SELECT * FROM tabUNIT;"
+
+
+Public Sub ComboExColors(obj as object)
+   Dim Status, a, b, c, d, e, f, g, h, i, j, k, l
+
+   a = Array(&HFFFFFF, &HF5E1E1, &H808080, &H8000D0, &HFFFFFF)
+   b = Array(&HCFCFCF, &HD2BDB9, &H100101, &HF5E1E1, &HA5B9C8)
+   c = Array(&H110101, &H110101, &HFFFFFF, &HFFFFFF, &H110101)
+   d = Array(&HA00000, &H10FFFF, &HFFFFFF, &H808080, &HFF0101)
+   e = Array(&HFFFFFF, &HBED2D2, &H808080, &H8000D0, &HFFFFFF)
+   f = Array(&H808080, &H808080, &H100101, &H808080, &H808080)
+   g = Array(&H808080, &H808080, &H808080, &H808080, &H808080)
+   h = Array(&H808080, &H808080, &HFFFFFF, &HFFFFFF, &H808080)
+   i = Array(&HFFFFFF, &HFFFFFF, &HFFFFFF, &HFFFFFF, &HFFFFFF)
+   j = Array(&H408080, &H808080, &H808080, &H808080, &H808080)
+   k = Array(&H808080, &H808080, &H808080, &HF5E1E1, &H808080)
+   l = Array(&HFFFFFF, &HFFFFFF, &HFFFFFF, &HFFFFFF, &HFFFFFF)
+   'Status:  0         1         2         3         4
+   '        =userdata, optional, readonly, disabled, validate
+   For Status = [userdata] To [validate]
+      obj.StatusInputBackColor(ST) = a(ST)
+      obj.StatusLabelBackColor(ST) = b(ST)
+      obj.StatusInputForeColor(ST) = c(ST)
+      obj.StatusLabelForeColor(ST) = d(ST)
+      obj.StatusInputBordColor(ST, 0) = e(ST)
+      obj.StatusInputBordColor(ST, 1) = f(ST)
+      obj.StatusInputBordColor(ST, 2) = g(ST)
+      obj.StatusInputBordColor(ST, 3) = g(ST)
+      obj.StatusLabelBordColor(ST, 0) = i(ST)
+      obj.StatusLabelBordColor(ST, 1) = j(ST)
+      obj.StatusLabelBordColor(ST, 2) = k(ST)
+      obj.StatusLabelBordColor(ST, 3) = l(ST)
+   Next
+End Sub
+

@@ -1,0 +1,256 @@
+'
+Type ConfigStatus
+   BackStyle               As enBackStyles
+   BackColor               As OLE_COLOR
+   BackImage               As StdPicture
+   bordStyle               As enBordStyles
+   BordColor(nBordes)      As OLE_COLOR
+   ForeColor               As OLE_COLOR
+   ForeStyle               As Boolean
+   ForeOmbra               As OLE_COLOR
+   CellColor               As OLE_COLOR
+   IconStyle               As enIconStyles
+   IconImage               As StdPicture
+   MaskColor(nMasked)      As OLE_COLOR
+   MaskImage(nMasked)      As Boolean
+   withImage(nMasked)      As Boolean
+End Type
+'
+' Text Alignment
+Enum enCaptionAlign
+   [Left..Justify] = 0
+   [Centered.Text] = 1
+   [Right.Justify] = 2
+End Enum
+'
+Enum enCaptionPlace
+   [Top....Align] = 0
+   [Center.Align] = 4
+   [Bottom.Align] = 8
+End Enum
+'
+' Appearance Style
+Enum enButtonStyles
+   [SimpleButton] = 0
+   [DropDownList] = 1
+End Enum
+'
+' Appearance Mode
+Enum enButtonStatus
+   [StdButton] = 0
+   [Std+Focus] = 1
+   [MouseOver] = 2
+   [MouseDown] = 3
+   [Drop.Down] = 4
+   [Disabled ] = 5
+   [UserModo1] = 6
+   [UserModo2] = 7
+End Enum
+'
+' Appearance Style
+Enum enBackStyles
+   [isSolid] = 0
+   [isImage] = 1
+   [isGlass] = 2
+End Enum
+'
+' Appearance Style
+Enum enBordStyles
+   [bHidden] = 0
+   [bSingle] = 1
+End Enum
+'
+' Appearance Style
+Enum enIconStyles
+   [NoneSetting] = 0
+   [CellColored] = 1
+   [Icon Shadow] = 2
+   [BothSetting] = 3
+End Enum
+'
+Enum enButtonBorder
+   [LF] = 0
+   [DN] = 1
+   [RG] = 2
+   [UP] = 3
+End Enum
+'
+' Mask Color selection
+Enum enMaskColor
+   [BackColor] = 0
+   [iconColor] = 1
+End Enum
+'
+Enum enDropStyles
+   [Hidden] = 0
+   [Single] = 1
+   [Raise1] = 2
+   [Raise2] = 3
+   [Inset1] = 4
+   [Inset2] = 5
+   [Etched] = 6
+   [Bumped] = 7
+End Enum
+'
+'
+Event MouseGone()
+Event MouseOver()
+Event Click(Button As Integer, ptrValue As Integer)
+Event MousePush(Button As Integer, Shift As Integer, x As Single, y As Single)
+Event MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Event MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+'
+Private Sub btnDefaults()
+   Dim st   As Integer
+   Dim A, B, C, D, E, F, G, H, I
+
+   A = Array(&HC0C0C0, &HC0C0C0, &HC0C0C0, &H808080, &H808080, &HC0C0C0, &H808080, &H808080)
+   B = Array(&HC0C0C0, &HC0C0C0, &HA5B9C8, &H808080, &H808080, &HA5B9C8, &H808080, &H808080)
+   C = Array(&H800000, &H800000, &HFFFFFF, &HFFFFFF, &HFFFFFF, &HFFFFFF, &HFFFFFF, &HFFFFFF)
+   D = Array(&HD0D0D0, &HD0D0D0, &H111111, &H111111, &H111111, &H111111, &H111111, &H111111)
+   E = Array(&HC0C0C0, &H800000, &HFFFFFF, &H111111, &HFFFFFF, &HFFFFFF, &H111111, &HFFFFFF)
+   F = Array(&HC0C0C0, &H800000, &H808080, &HFFFFFF, &H808080, &H808080, &HFFFFFF, &H808080)
+   G = Array(&HC0C0C0, &H800000, &H808080, &HFFFFFF, &H808080, &H808080, &HFFFFFF, &H808080)
+   H = Array(&HC0C0C0, &H800000, &HFFFFFF, &H111111, &HFFFFFF, &HFFFFFF, &H111111, &HFFFFFF)
+   I = Array(False, False, False, False, False, False, False, False)
+   'st:      0         1         2         3         4         5         6         7
+   '        =Standard, +Focus  , mOver   , mDown   , dropDown, Disabled, User1   , User2
+
+   For st = 0 To nStatus
+      defStatus(st).BackColor = A(st)
+      defStatus(st).CellColor = B(st)
+      defStatus(st).ForeColor = C(st)
+      defStatus(st).ForeOmbra = D(st)
+      defStatus(st).ForeStyle = I(st)
+      defStatus(st).bordStyle = bSingle
+      defStatus(st).IconStyle = CellColored
+      defStatus(st).BackStyle = isSolid
+      defStatus(st).BordColor(LF) = E(st)
+      defStatus(st).BordColor(DN) = F(st)
+      defStatus(st).BordColor(RG) = G(st)
+      defStatus(st).BordColor(UP) = H(st)
+      defStatus(st).MaskColor(0) = RGB(255, 255, 255)
+      defStatus(st).MaskColor(1) = RGB(255, 255, 255)
+      defStatus(st).MaskImage(0) = False
+      defStatus(st).MaskImage(1) = False
+      defStatus(st).withImage(0) = False
+      defStatus(st).withImage(1) = False
+   Next
+End Sub
+
+Public Property Get Enabled() As Boolean
+Public Property Let Enabled(ByVal vData As Boolean)
+Public Property Get ButtonFocus() As Boolean
+Public Property Let ButtonFocus(ByVal vData As Boolean)
+Public Property Get ButtonStatus() As enButtonStatus
+Public Property Let ButtonStatus(ByVal vData As enButtonStatus)
+Public Property Get ButtonFont() As IFont
+Public Property Set ButtonFont(ByVal vData As IFont)
+Public Property Get ButtonStyle() As enButtonStyles
+Public Property Let ButtonStyle(ByVal vData As enButtonStyles)
+Public Property Get ButtonArrowY() As Integer
+Public Property Let ButtonArrowY(ByVal vData As Integer)
+Public Property Get ButtonSeparator() As Boolean
+Public Property Let ButtonSeparator(ByVal vData As Boolean)
+Public Property Get Caption() As String
+Public Property Let Caption(ByVal vData As String)
+Public Property Get CaptionAlignment() As enCaptionAlign
+Public Property Let CaptionAlignment(ByVal vData As enCaptionAlign)
+Public Property Get CaptionPlacement() As enCaptionPlace
+Public Property Let CaptionPlacement(ByVal vData As enCaptionPlace)
+Public Property Get CaptionForcedPos() As Boolean
+Public Property Let CaptionForcedPos(ByVal vData As Boolean)
+Public Property Get ButtonImage() As StdPicture
+Public Property Set ButtonImage(ByVal vData As StdPicture)
+Public Property Get ButtonInternalGap() As String
+Public Property Let ButtonInternalGap(ByVal vData As String)
+Public Property Get ButtonBackStyle(ByVal Index As enButtonStatus) As enBackStyles
+Public Property Let ButtonBackStyle(ByVal Index As enButtonStatus, ByVal vData As enBackStyles)
+Public Property Get ButtonBackColor(ByVal Index As enButtonStatus) As OLE_COLOR
+Public Property Let ButtonBackColor(ByVal Index As enButtonStatus, ByVal vData As OLE_COLOR)
+Public Property Get ButtonBackImage(ByVal Index As enButtonStatus) As StdPicture
+Public Property Set ButtonBackImage(ByVal Index As enButtonStatus, ByVal vData As StdPicture)
+Public Property Get ButtonIconImage(ByVal Index As enButtonStatus) As StdPicture
+Public Property Set ButtonIconImage(ByVal Index As enButtonStatus, ByVal vData As StdPicture)
+Public Property Get ButtonBordStyle(ByVal Index As enButtonStatus) As enBordStyles
+Public Property Let ButtonBordStyle(ByVal Index As enButtonStatus, ByVal vData As enBordStyles)
+Public Property Get ButtonBordColor(ByVal Index As enButtonStatus, ByVal Bord As enButtonBorder) As OLE_COLOR
+Public Property Let ButtonBordColor(ByVal Index As enButtonStatus, ByVal Bord As enButtonBorder, ByVal vData As OLE_COLOR)
+Public Property Get ButtonMaskColor(ByVal Index As enButtonStatus, ByVal Mask As enMaskColor) As OLE_COLOR
+Public Property Let ButtonMaskColor(ByVal Index As enButtonStatus, ByVal Mask As enMaskColor, ByVal vData As OLE_COLOR)
+Public Property Get ButtonMaskImage(ByVal Index As enButtonStatus, ByVal Mask As enMaskColor) As Boolean
+Public Property Let ButtonMaskImage(ByVal Index As enButtonStatus, ByVal Mask As enMaskColor, ByVal vData As Boolean)
+Public Property Get ButtonWithImage(ByVal Index As enButtonStatus, ByVal Mask As enMaskColor) As Boolean
+Public Property Let ButtonWithImage(ByVal Index As enButtonStatus, ByVal Mask As enMaskColor, ByVal vData As Boolean)
+Public Property Get ButtonCellColor(ByVal Index As enButtonStatus) As OLE_COLOR
+Public Property Let ButtonCellColor(ByVal Index As enButtonStatus, ByVal vData As OLE_COLOR)
+Public Property Get ButtonIconStyle(ByVal Index As enButtonStatus) As enIconStyles
+Public Property Let ButtonIconStyle(ByVal Index As enButtonStatus, ByVal vData As enIconStyles)
+Public Property Get ButtonForeColor(ByVal Index As enButtonStatus) As OLE_COLOR
+Public Property Let ButtonForeColor(ByVal Index As enButtonStatus, ByVal vData As OLE_COLOR)
+Public Property Get ButtonForeShadow(ByVal Index As enButtonStatus) As OLE_COLOR
+Public Property Let ButtonForeShadow(ByVal Index As enButtonStatus, ByVal vData As OLE_COLOR)
+Public Property Get ButtonTextShadow(ByVal Index As enButtonStatus) As Boolean
+Public Property Let ButtonTextShadow(ByVal Index As enButtonStatus, ByVal vData As Boolean)
+Public Property Get Icon() As StdPicture
+Public Property Set Icon(ByVal vData As StdPicture)
+Public Property Get IconMaskColor() As OLE_COLOR
+Public Property Let IconMaskColor(ByVal vData As OLE_COLOR)
+Public Property Get IconCellLeftX() As Integer
+Public Property Let IconCellLeftX(ByVal vData As Integer)
+Public Property Get IconCellWidth() As Integer
+Public Property Let IconCellWidth(ByVal vData As Integer)
+Public Property Get IconCellHeight() As Integer
+Public Property Let IconCellHeight(ByVal vData As Integer)
+Public Property Get IconSizeWidth() As Integer
+Public Property Let IconSizeWidth(ByVal vData As Integer)
+Public Property Get IconSizeHeight() As Integer
+Public Property Let IconSizeHeight(ByVal vData As Integer)
+Public Property Get hWnd() As Long
+Public Property Get hDC() As Long
+Public Property Get ButtonWidth() As Long
+Public Property Get ButtonHeight() As Long
+Public Property Get DropButtons() As Integer
+Public Property Let DropButtons(ByVal vData As Integer)
+Public Property Let DropWithImage(ByVal thisButton As Integer, ByVal vData As Boolean)
+Public Property Get DropWithImage(ByVal thisButton As Integer) As Boolean
+Public Property Set DropIconImage(ByVal thisButton As Integer, ByVal vData As StdPicture)
+Public Property Get DropIconImage(ByVal thisButton As Integer) As StdPicture
+Public Property Let DropMaskColor(ByVal thisButton As Integer, ByVal vData As OLE_COLOR)
+Public Property Get DropMaskColor(ByVal thisButton As Integer) As OLE_COLOR
+Public Property Let DropCaption(ByVal thisButton As Integer, ByVal vData As String)
+Public Property Get DropCaption(ByVal thisButton As Integer) As String
+Public Property Let DropPtrButton(ByVal thisButton As Integer, ByVal vData As Integer)
+Public Property Get DropPtrButton(ByVal thisButton As Integer) As Integer
+Public Property Let DropCellColor(ByVal vData As OLE_COLOR)
+Public Property Get DropCellColor() As OLE_COLOR
+Public Property Let DropCellColorOver(ByVal vData As OLE_COLOR)
+Public Property Get DropCellColorOver() As OLE_COLOR
+Public Property Let DropBackColor(ByVal vData As OLE_COLOR)
+Public Property Get DropBackColor() As OLE_COLOR
+Public Property Let DropBackColorOver(ByVal vData As OLE_COLOR)
+Public Property Get DropBackColorOver() As OLE_COLOR
+Public Property Let DropForeColor(ByVal vData As OLE_COLOR)
+Public Property Get DropForeColor() As OLE_COLOR
+Public Property Let DropForeColorOver(ByVal vData As OLE_COLOR)
+Public Property Get DropForeColorOver() As OLE_COLOR
+Public Property Let DropGapAround(ByVal vData As Integer)
+Public Property Get DropGapAround() As Integer
+Public Property Set DropCaptionFont(ByVal vData As IFont)
+Public Property Get DropCaptionFont() As IFont
+Public Property Let DropWidth(ByVal vData As Integer)
+Public Property Get DropWidth() As Integer
+Public Property Let DropCellWidth(ByVal vData As Integer)
+Public Property Get DropCellWidth() As Integer
+Public Property Let DropCellHeight(ByVal vData As Integer)
+Public Property Get DropCellHeight() As Integer
+Public Property Let DropIconWidth(ByVal vData As Integer)
+Public Property Get DropIconWidth() As Integer
+Public Property Let DropIconHeight(ByVal vData As Integer)
+Public Property Get DropIconHeight() As Integer
+Public Property Let DropCaptionAlign(ByVal vData As enCaptionAlign)
+Public Property Get DropCaptionAlign() As enCaptionAlign
+Public Property Let DropBordStyle(ByVal vData As enDropStyles)
+Public Property Get DropBordStyle() As enDropStyles
+Public Sub Refresh()
+
